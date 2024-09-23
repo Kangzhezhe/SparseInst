@@ -1,0 +1,13 @@
+_BASE_: "Base-SparseInst-Video.yaml"
+DATASETS:
+  TRAIN: ("ovis_train",)
+  TEST: ("ovis_val",)
+SOLVER:
+  IMS_PER_BATCH: 18
+  BASE_LR: 0.000001
+  STEPS: (12000, 14000)
+  MAX_ITER: 20000
+  CHECKPOINT_PERIOD: 2000
+INPUT:
+  SAMPLING_FRAME_NUM: 1
+OUTPUT_DIR: "output/sparse_inst_r50_giam_video"

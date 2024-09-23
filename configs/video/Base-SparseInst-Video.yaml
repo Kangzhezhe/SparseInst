@@ -1,0 +1,49 @@
+MODEL:
+  META_ARCHITECTURE: "SparseInst"
+  BACKBONE:
+    FREEZE_AT: 0
+    NAME: "build_resnet_backbone"
+  WEIGHTS: "detectron2://ImageNetPretrained/torchvision/R-50.pkl"
+  PIXEL_MEAN: [123.675, 116.280, 103.530]
+  PIXEL_STD: [58.395, 57.120, 57.375]
+  MASK_ON: True
+  RESNETS:
+    NORM: "FrozenBN"
+    DEPTH: 50
+    STEM_TYPE: "basic"  # not used
+    STEM_OUT_CHANNELS: 64
+    STRIDE_IN_1X1: False
+    OUT_FEATURES: ["res2", "res3", "res4", "res5"]
+    # NORM: "SyncBN"
+    RES5_MULTI_GRID: [1, 1, 1]  # not used
+  SPARSE_INST:
+    VIDEO_TASK: True
+    ENCODER:
+      NAME: "InstanceContextEncoder"
+    DECODER:
+      NUM_CLASSES: 25
+      NAME: "GroupIAMDecoder"
+DATASETS:
+  TRAIN: ("ovis_train",)
+  TEST: ("ovis_val",)
+SOLVER:
+  IMS_PER_BATCH: 8
+  BASE_LR: 0.00005
+  STEPS: (7000,)
+  MAX_ITER: 10000
+  WEIGHT_DECAY: 0.05
+INPUT:
+  MIN_SIZE_TRAIN_SAMPLING: "choice_by_clip"
+  RANDOM_FLIP: "flip_by_clip"
+  AUGMENTATIONS: []
+  MIN_SIZE_TRAIN: (416, 448, 480, 512, 544, 576, 608, 640)
+  MAX_SIZE_TRAIN: 853
+  MIN_SIZE_TEST: 640
+  MAX_SIZE_TEST: 853
+  FORMAT: "RGB"
+  MASK_FORMAT: "bitmask"
+TEST:
+  EVAL_PERIOD: 73300
+DATALOADER:
+  NUM_WORKERS: 6
+VERSION: 2

@@ -1,0 +1,1 @@
+python demo_sort/demo.py --config-file configs/image/sparse_inst_r50_giam_sort.yaml  --input /data1/cvproj2024/data/OVIS/train/0b4b662c/*  --output ./result/  --opt MODEL.WEIGHTS model_final.pth  MODEL.DEVICE cpu

@@ -1,0 +1,1 @@
+CUDA_VISIBLE_DEVICES=0,1,2 python train_net_video.py --config-file configs/video/sparse_inst_r50_giam_video.yaml --dist-url='tcp://127.0.0.1:50168'  --num-gpus 3  MODEL.WEIGHTS pretraind_weights/sparse_inst_r50_giam_aug_2b7d68.pth

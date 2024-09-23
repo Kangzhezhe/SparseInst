@@ -1,0 +1,15 @@
+_BASE_: "Base-SparseInst.yaml"
+MODEL:
+#   WEIGHTS: "pretrained_models/R-50.pkl"
+  SPARSE_INST:
+    DECODER:
+      NUM_CLASSES: 25
+      
+DATASETS:
+  TRAIN: ("ovis_train",)
+  TEST:  ("ovis_val",)
+SOLVER:
+  IMS_PER_BATCH: 16
+  MAX_ITER: 2000
+  BASE_LR: 0.00005
+OUTPUT_DIR: "output/sparse_inst_r50_giam"
